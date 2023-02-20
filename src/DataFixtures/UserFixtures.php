@@ -18,87 +18,105 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             [
                 'name' => 'Jhonson',
                 'firstname' => 'Dwayne',
-                'email' => 'jhonson@gmail.com'
+                'email' => 'jhonson@gmail.com',
+                'phone' => '0102030405'
             ],
             [
                 'name' => 'Snipes',
                 'firstname' => 'Wesley',
-                'email' => 'snipes@gmail.com'
+                'email' => 'snipes@gmail.com',
+                'phone' => '0908070605'
             ],
             [
                 'name' => 'Stalone',
                 'firstname' => 'silvester',
-                'email' => 'stalone@gmail.com'
+                'email' => 'stalone@gmail.com',
+                'phone' => '0605040802'
             ],
             [
                 'name' => 'Van damme',
                 'firstname' => 'Jean Claude',
-                'email' => 'vandamn@gmail.com'
+                'email' => 'vandamn@gmail.com',
+                'phone' => '0304080606'
             ],
             [
                 'name' => 'Lee',
                 'firstname' => 'Bruce',
-                'email' => 'lee@gmail.com'
+                'email' => 'lee@gmail.com',
+                'phone' => '0305060402'
             ],
             [
                 'name' => 'Norris',
                 'firstname' => 'Chuck',
-                'email' => 'norris@gmail.com'
+                'email' => 'norris@gmail.com',
+                'phone' => '0102030807'
             ],
             [
                 'name' => 'Statham',
                 'firstname' => 'Jason',
-                'email' => 'statham@gmail.com'
+                'email' => 'statham@gmail.com',
+                'phone' => '0102540807'
             ],
             [
                 'name' => 'Willis',
                 'firstname' => 'Bruce',
-                'email' => 'willis@gmail.com'
+                'email' => 'willis@gmail.com',
+                'phone' => '0102032807'
+
             ],
             [
                 'name' => 'Li',
                 'firstname' => 'Jet',
-                'email' => 'li@gmail.com'
+                'email' => 'li@gmail.com',
+                'phone' => '0130030807'
             ],
             [
                 'name' => 'Schwarzenegger',
                 'firstname' => 'Arnold',
-                'email' => 'scharzenegger@gmail.com'
+                'email' => 'scharzenegger@gmail.com',
+                'phone' => '0301020406'
             ],
             [
-                'name' => 'Freeman',
-                'firstname' => 'Morgan',
-                'email' => 'freeman@gmail.com'
+                'name' => 'Murphy',
+                'firstname' => 'Eddy',
+                'email' => 'Murphy@gmail.com',
+                'phone' => '0605040302'
             ],
             [
                 'name' => 'Spacey',
                 'firstname' => 'Kevin',
-                'email' => 'spacey@gmail.com'
+                'email' => 'spacey@gmail.com',
+                'phone' => '0203005821'
             ],
             [
                 'name' => 'Wahlberg',
                 'firstname' => 'Mark',
-                'email' => 'wahlberg@gmail.com'
+                'email' => 'wahlberg@gmail.com',
+                'phone' => '0203005821'
             ],
             [
-                'name' => 'Diesel',
-                'firstname' => 'Vin',
-                'email' => 'diesel@gmail.com'
+                'name' => 'Freeman',
+                'firstname' => 'Morgan',
+                'email' => 'freeman@gmail.com',
+                'phone' => '0203005821'
             ],
             [
                 'name' => 'Damon',
                 'firstname' => 'Matt',
-                'email' => 'damon@gmail.com'
+                'email' => 'damon@gmail.com',
+                'phone' => '0506040201'
             ],
             [
                 'name' => 'Hanks',
                 'firstname' => 'Tom',
-                'email' => 'hanks@gmail.com'
+                'email' => 'Hanks@gmail.com',
+                'phone' => '0203005821'
             ],
             [
                 'name' => 'Pacino',
                 'firstname' => 'Al',
-                'email' => 'pacino@gmail.com'
+                'email' => 'pacino@gmail.com',
+                'phone' => '0206040907'
             ],
 
         ];
@@ -112,6 +130,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setName($userData['name'])
                 ->setFirstname($userData['firstname'])
                 ->setEmail($userData['email'])
+                ->setPhone($userData['phone'])
                 ->setCreatedAt(new DateTimeImmutable())
                 ->setCustomer($customer);
 
@@ -127,7 +146,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             CustomerFixtures::class,
-            ProductFixtures::class,
+            ProductFixtures::class
         ];
     }
 }

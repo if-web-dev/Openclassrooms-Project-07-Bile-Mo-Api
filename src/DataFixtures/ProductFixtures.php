@@ -69,7 +69,7 @@ class ProductFixtures extends Fixture
                 'description' => 'Un téléphone tres simple au fonctions basiques satisfaisantes',
                 'sku' => 'PXIA-8GBRED10A-BA'
             ]
-
+            
         ];
 
         foreach ($products as $index => $productData) {
@@ -85,7 +85,9 @@ class ProductFixtures extends Fixture
 
             $this->addReference(self::PRODUCT_REFERENCE . $index, $product);
         }
-
+        
         $manager->flush();
+
     }
+
 }
