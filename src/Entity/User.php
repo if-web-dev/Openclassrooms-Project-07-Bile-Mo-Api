@@ -53,7 +53,7 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get:user:item','get:user:collection', 'post:user', 'patch:user'])]
+    #[Groups(['get:user:item','get:user:collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -65,7 +65,7 @@ class User
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Groups(['get:user:item','get:user:collection', 'post:user'])]
+    #[Groups(['get:user:item','get:user:collection', 'post:user', 'patch:user'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -77,7 +77,7 @@ class User
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['get:user:item'])]
+    #[Groups(['get:user:item', 'patch:user' ])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
