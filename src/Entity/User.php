@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ApiResource(
-    formats: ["jsonhal"],
+    formats: ["jsonhal", "jsonld"],
     paginationItemsPerPage: 5,
     operations: [
         new Get(
@@ -34,7 +34,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
             denormalizationContext: [
                 'groups' => ['post:user']
             ],
-            uriTemplate: '/users/{id}/create',
+            uriTemplate: '/users/create',
         ),
         new Patch(
             denormalizationContext: [
@@ -65,7 +65,7 @@ class User
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Groups(['get:user:item','get:user:collection'])]
+    #[Groups(['get:user:item','get:user:collection', 'post:user'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -73,7 +73,7 @@ class User
     private ?string $phone = null;
 
     #[ORM\Column]
-    #[Groups(['get:user:item'])]
+    #[Groups(['get:user:item', 'post:user'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]

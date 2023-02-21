@@ -14,13 +14,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
-    formats: ["jsonhal"],
+    formats: ["jsonhal", "jsonld"],
     paginationItemsPerPage: 5,
     operations: [
         new Get(),
         new GetCollection(),
         new Post(
-            uriTemplate: '/products/{id}/create',
+            uriTemplate: '/products/create',
         ),
         new Patch(
             uriTemplate: '/products/{id}/update',
