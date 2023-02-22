@@ -22,17 +22,22 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     paginationItemsPerPage: 5,
     operations: [
         new Get(
+            provider: UserProvider::class,
             normalizationContext: [
                 'groups' => ['get:user:item']
             ]
         ),
         new GetCollection(
+            provider: UserProvider::class,
             normalizationContext: [
                 'groups' => ['get:user:collection']
             ]
         ),
         new Post(
             processor: UserProcessor::class,
+            normalizationContext: [
+                'groups' => ['get:user:item']
+            ],
             denormalizationContext: [
                 'groups' => ['post:user']
             ],
