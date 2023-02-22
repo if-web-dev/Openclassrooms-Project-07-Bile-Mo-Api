@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\State\UserProvider;
+use App\State\UserProcessor;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -17,7 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ApiResource(
-    formats: ["jsonhal", "jsonld"],
+    formats: ["jsonld", "jsonhal"],
     paginationItemsPerPage: 5,
     operations: [
         new Get(
@@ -31,18 +32,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
             ]
         ),
         new Post(
+            processor: UserProcessor::class,
             denormalizationContext: [
                 'groups' => ['post:user']
             ],
             uriTemplate: '/users/create',
         ),
-        new Patch(
-            denormalizationContext: [
-                'groups' => ['patch:user']
-            ],
-            uriTemplate: '/users/{id}/update',
-        ),
         new Delete(
+            processor: UserProcessor::class,
             uriTemplate: '/users/{id}/delete',
         )
     ]
@@ -53,23 +50,23 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get:user:item','get:user:collection'])]
+    #[Groups(['get:user:item','get:user:collection', 'post:user'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get:user:item','get:user:collection', 'post:user', 'patch:user'])]
+    #[Groups(['get:user:item','get:user:collection', 'post:user'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get:user:item','get:user:collection', 'post:user', 'patch:user'])]
+    #[Groups(['get:user:item','get:user:collection', 'post:user'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Groups(['get:user:item','get:user:collection', 'post:user', 'patch:user'])]
+    #[Groups(['get:user:item','get:user:collection', 'post:user'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get:user:item', 'post:user', 'patch:user'])]
+    #[Groups(['get:user:item', 'post:user'])]
     private ?string $phone = null;
 
     #[ORM\Column]
@@ -77,7 +74,7 @@ class User
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['get:user:item', 'patch:user' ])]
+    #[Groups(['get:user:item'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
