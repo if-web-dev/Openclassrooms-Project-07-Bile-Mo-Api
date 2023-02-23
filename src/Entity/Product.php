@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProductRepository;
 use ApiPlatform\Metadata\GetCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -49,9 +50,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity(fields: ['model'])]
 class Product
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     #[Groups(['get:product:item','get:product:collection'])]
     private ?int $id = null;
 
@@ -60,18 +59,46 @@ class Product
      */
     #[ORM\Column(length: 255, unique: true)]
     #[Groups(['get:product:item','get:product:collection'])]
+    #[Assert\Length(
+        min: 8,
+        minMessage: 'The sku must be at least {{ limit }} characters long',
+        max: 16,
+        maxMessage: 'The sku cannot be longer than {{ limit }} characters'
+    )]
     private ?string $sku = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['get:product:item','get:product:collection'])]
+    #[Assert\NotBlank]
+    #[Assert\NotNull(message: '{{ label }} is empty, please enter a value.')]
+    #[Assert\Length(
+        min: 2,
+        minMessage: 'The brand must be at least {{ limit }} characters long',
+        max: 50,
+        maxMessage: 'The brand cannot be longer than {{ limit }} characters'
+    )]
     private ?string $brand = null;
 
     #[ORM\Column(length: 255, unique: true)]
     #[Groups(['get:product:item','get:product:collection'])]
+    #[Assert\NotBlank]
+    #[Assert\NotNull(message: '{{ label }} is empty, please enter a value.')]
+    #[Assert\Length(
+        min: 2,
+        minMessage: 'The model must be at least {{ limit }} characters long.',
+        max: 50,
+        maxMessage: 'The model cannot be longer than {{ limit }} characters.'
+    )]
     private ?string $model = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['get:product:item'])]
+    #[Assert\Length(
+        min: 1,
+        minMessage: 'The description must be at least {{ limit }} characters long.',
+        max: 255,
+        maxMessage: 'The description cannot be longer than {{ limit }} characters'
+    )]
     private ?string $description = null;
 
     #[ORM\Column]
