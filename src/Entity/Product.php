@@ -3,13 +3,11 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProductRepository;
 use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -17,16 +15,33 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     formats: ["jsonhal", "jsonld"],
     paginationItemsPerPage: 5,
     operations: [
-        new Get(),
-        new GetCollection(),
-        new Post(
-            uriTemplate: '/products/create',
+        new Get(
+            normalizationContext: [
+                'groups' => ['get:product:item']
+            ],
+            openapiContext: [
+                'responses' => [
+                    '200' => ['description' => 'Product resource.'],
+                    '400' => ['description' => 'Bad request.'],
+                    '401' => ['description' => 'Authentication is required.'],
+                    '403' => ['description' => 'Invalid JWT token.'],
+                    '404' => ['description' => 'Product resource not found.'],
+                ]
+            ]
         ),
-        new Patch(
-            uriTemplate: '/products/{id}/update',
-        ),
-        new Delete(
-            uriTemplate: '/products/{id}/delete',
+        new GetCollection(
+            normalizationContext: [
+                'groups' => ['get:product:collection']
+            ],
+            openapiContext: [
+                'responses' => [
+                    '200' => ['description' => 'Products collection.'],
+                    '400' => ['description' => 'Bad request.'],
+                    '401' => ['description' => 'Authentication is required.'],
+                    '403' => ['description' => 'Invalid JWT token.'],
+                    '404' => ['description' => 'Product resource not found.'],
+                ]
+            ]
         )
     ]
 )]
@@ -37,25 +52,31 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get:product:item','get:product:collection'])]
     private ?int $id = null;
 
+    /**
+     * Stock Keeping Unit (a.k.a. bar code)
+     */
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['get:product:item','get:product:collection'])]
     private ?string $sku = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get:product:item','get:product:collection'])]
     private ?string $brand = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['get:product:item','get:product:collection'])]
     private ?string $model = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get:product:item'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['get:product:item'])]
     private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -118,18 +139,6 @@ class Product
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

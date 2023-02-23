@@ -12,8 +12,10 @@ use ApiPlatform\Metadata\CollectionOperationInterface;
 
 final class UserProvider implements ProviderInterface
 {
-    public function __construct( private UserRepository $userRepository, private Security $security) 
-    {
+    public function __construct(
+        private UserRepository $userRepository,
+        private Security $security
+    ) {
     }
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
