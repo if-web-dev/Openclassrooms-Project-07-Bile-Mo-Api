@@ -25,12 +25,30 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
             provider: UserProvider::class,
             normalizationContext: [
                 'groups' => ['get:user:item']
+            ],
+            openapiContext: [
+                'responses' => [
+                    '200' => ['description' => 'User item.'],
+                    '400' => ['description' => 'Bad request.'],
+                    '401' => ['description' => 'Authentication is required.'],
+                    '403' => ['description' => 'Invalid JWT token.'],
+                    '404' => ['description' => 'User resource not found.'],
+                ]
             ]
         ),
         new GetCollection(
             provider: UserProvider::class,
             normalizationContext: [
                 'groups' => ['get:user:collection']
+            ],
+            openapiContext: [
+                'responses' => [
+                    '200' => ['description' => 'Users collection.'],
+                    '400' => ['description' => 'Bad request.'],
+                    '401' => ['description' => 'Authentication is required.'],
+                    '403' => ['description' => 'Invalid JWT token.'],
+                    '404' => ['description' => 'User resource not found.'],
+                ]
             ]
         ),
         new Post(
@@ -42,10 +60,28 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
                 'groups' => ['post:user']
             ],
             uriTemplate: '/users/create',
+            openapiContext: [
+                'responses' => [
+                    '201' => ['description' => 'User resource created.'],
+                    '400' => ['description' => 'Bad request.'],
+                    '401' => ['description' => 'Authentication is required.'],
+                    '403' => ['description' => 'Invalid JWT token.'],
+                    '404' => ['description' => 'User resource not found.'],
+                ]
+            ]
         ),
         new Delete(
             processor: UserProcessor::class,
             uriTemplate: '/users/{id}/delete',
+            openapiContext: [
+                'responses' => [
+                    '204' => ['description' => 'Customer resource deleted.'],
+                    '400' => ['description' => 'Bad request.'],
+                    '401' => ['description' => 'Authentication is required.'],
+                    '403' => ['description' => 'Invalid JWT token.'],
+                    '404' => ['description' => 'Customer resource not found.'],
+                ]
+            ]
         )
     ]
 )]
@@ -77,10 +113,6 @@ class User
     #[ORM\Column]
     #[Groups(['get:user:item', 'post:user'])]
     private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column(nullable: true)]
-    #[Groups(['get:user:item'])]
-    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
@@ -135,18 +167,6 @@ class User
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }
