@@ -2,7 +2,7 @@
 
 
 ## A webservice exposing a REST API with API PLATFORM
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/562c8fa90fca405dbd3f7c0f9d967ed2)](https://www.codacy.com/gh/jupanaos/SF_BileMo-API/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jupanaos/SF_BileMo-API&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/90a7c2bedebd4a2d81e0a284691b93f7)](https://www.codacy.com/gh/if-web-dev/Openclassrooms-Project-07-Bile-Mo-Api/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=if-web-dev/Openclassrooms-Project-07-Bile-Mo-Api&amp;utm_campaign=Badge_Grade)
 
 We present the project 7 of the PHP/Symfony application developer course. Create an API REST of a B2B phone catalog.
 We have customers who can access Bile-mo products and their assigned users after authentication with a JWT token.
