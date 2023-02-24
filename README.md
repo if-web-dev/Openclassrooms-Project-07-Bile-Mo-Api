@@ -29,8 +29,11 @@ Follow the next steps if you would like to install this project. Or you can skip
 
 
 ### Configuration
-- generate JWT in the terminal: `mkdir config\jwt`, `openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa
-_keygen_bits:4096`, `openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem
+- generate JWT in the terminal:  
+`mkdir config\jwt`  
+`openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa
+_keygen_bits:4096`  
+`openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem
  -pubout`
 
 #### Run the server
