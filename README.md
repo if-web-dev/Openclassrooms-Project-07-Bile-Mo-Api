@@ -1,7 +1,7 @@
 # Openclassrooms-Project-07-Bile-Mo-Api
 
 
-## A webservice exposing a REST API
+## A webservice exposing a REST API with API PLATFORM
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/562c8fa90fca405dbd3f7c0f9d967ed2)](https://www.codacy.com/gh/jupanaos/SF_BileMo-API/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jupanaos/SF_BileMo-API&amp;utm_campaign=Badge_Grade)
 
 We present the project 7 of the PHP/Symfony application developer course. Create an API REST of a B2B phone catalog.
@@ -28,7 +28,7 @@ Follow the next steps if you would like to install this project. Or you can skip
 
 
 
-### 🔧 Configuration
+### Configuration
 - generate JWT in the terminal: `mkdir config\jwt`, `openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa
 _keygen_bits:4096`, `openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem
  -pubout`
