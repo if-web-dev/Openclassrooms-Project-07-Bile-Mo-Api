@@ -32,8 +32,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
                 'responses' => [
                     '200' => ['description' => 'User item.'],
                     '400' => ['description' => 'Bad request.'],
-                    '401' => ['description' => 'Authentication is required.'],
-                    '403' => ['description' => 'Invalid JWT token.'],
+                    '401' => ['description' => 'Token expired.'],
+                    '403' => ['description' => 'Access denied.'],
                     '404' => ['description' => 'User resource not found.'],
                 ]
             ]
@@ -47,8 +47,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
                 'responses' => [
                     '200' => ['description' => 'Users collection.'],
                     '400' => ['description' => 'Bad request.'],
-                    '401' => ['description' => 'Authentication is required.'],
-                    '403' => ['description' => 'Invalid JWT token.'],
+                    '401' => ['description' => 'token expired.'],
+                    '403' => ['description' => 'Access denied.'],
                     '404' => ['description' => 'User resource not found.'],
                 ]
             ]

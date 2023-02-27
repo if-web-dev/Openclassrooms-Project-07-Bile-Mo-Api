@@ -24,8 +24,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
                 'responses' => [
                     '200' => ['description' => 'Product resource.'],
                     '400' => ['description' => 'Bad request.'],
-                    '401' => ['description' => 'Authentication is required.'],
-                    '403' => ['description' => 'Invalid JWT token.'],
+                    '401' => ['description' => 'Token expired.'],
+                    '403' => ['description' => 'Access denied.'],
                     '404' => ['description' => 'Product resource not found.'],
                 ]
             ]
@@ -38,8 +38,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
                 'responses' => [
                     '200' => ['description' => 'Products collection.'],
                     '400' => ['description' => 'Bad request.'],
-                    '401' => ['description' => 'Authentication is required.'],
-                    '403' => ['description' => 'Invalid JWT token.'],
+                    '401' => ['description' => 'Token expired.'],
+                    '403' => ['description' => 'Access denied.'],
                     '404' => ['description' => 'Product resource not found.'],
                 ]
             ]
